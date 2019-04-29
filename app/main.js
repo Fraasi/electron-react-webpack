@@ -15,5 +15,5 @@ app.on('ready', () => {
             nodeIntegration: true
         }
     });
-    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/index.html`);
 });
