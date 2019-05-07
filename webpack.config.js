@@ -1,15 +1,18 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const CopyPlugin = require('copy-webpack-plugin');
 const ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
   watch: ENV === 'development',
   target: 'electron-renderer',
-  entry: './app/src/renderer_process.js',
+  entry: './src/renderer_process.js',
   output: {
-    path: __dirname + '/app/build',
-    publicPath: 'build/',
+    path: __dirname + '/build',
+    publicPath: '',
     filename: 'bundle.js'
+  },
+  node: {
+    __dirname: false
   },
   module: {
     rules: [
@@ -40,7 +43,7 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         query: {
-          name: '[name].[ext]?[hash]'
+          name: 'images/[name].[ext]?[hash]'
         }
       }
     ]
@@ -51,7 +54,10 @@ module.exports = {
       filename: 'bundle.css',
       disable: false,
       allChunks: true
-    })
+    }),
+    new CopyPlugin([
+      { from: 'src/index.html', to: 'index.html' }
+    ]),
   ],
 
   resolve: {

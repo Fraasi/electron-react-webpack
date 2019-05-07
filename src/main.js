@@ -1,4 +1,5 @@
 // Basic init
+const path = require('path');
 const { app, BrowserWindow } = require('electron');
 
 // Let electron reloads by itself when webpack watches changes in ./app/
@@ -15,5 +16,6 @@ app.on('ready', () => {
             nodeIntegration: true
         }
     });
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
+    mainWindow.toggleDevTools();
 });
