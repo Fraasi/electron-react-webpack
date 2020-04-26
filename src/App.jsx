@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
 import Logo from './components/Logo'
 import Link from './components/Link'
 
